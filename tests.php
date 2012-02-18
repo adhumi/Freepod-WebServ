@@ -40,20 +40,23 @@ while ( $row = mysql_fetch_row ( $result ) ) {
 			echo "Type : " . $item->enclosure->attributes ()->type . "<br />";
 			echo "<hr>";
 			
+			echo date('Y-m-d H:i:s', strtotime($item->pubDate))."<br>";
+			
 			$query = "INSERT INTO episodes (id_podcast, title, url, type, description, pubDate, author, explicit, duration, image, keywords)
 						VALUES ('".$row[0]."',
 								'".addslashes ($item->title)."',
 								'".$item->enclosure->attributes ()->url."',
 								'".$item->enclosure->attributes ()->type."',
 								'".addslashes ($item->description)."',
-								'".$item->pubDate."',
+								'".date('Y-m-d H:i:s', strtotime($item->pubDate))."',
 								'".addslashes ($itunes->author)."',
 								'".$itunes->explicit."',
 								'".$itunes->duration."',
 								'".$img."',
 								'".addslashes ($itunes->keywords)."')";
-			echo $query . "<hr />";
-			print_r(mysql_query ( $query ));
+			print_r($query);
+			echo "<hr />";
+			//print_r(mysql_query ( $query ));
 		}
 	}
 }
