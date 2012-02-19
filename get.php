@@ -3,26 +3,54 @@
 include ('bdd_connect.php');
 connexion ( 'webserv' );
 
-if (isset($_GET['key']) && mysql_num_rows(mysql_query ( "SELECT * FROM `api_key`  WHERE token = '" . $_GET['key'] . "'" )) != 0) {
+if (isset ( $_GET ['key'] ) && mysql_num_rows ( mysql_query ( "SELECT * FROM `api_key`  WHERE token = '" . $_GET ['key'] . "'" ) ) != 0) {
 	
 	if (isset ( $_GET ['podcasts'] )) {
-		$query = "SELECT * FROM podcasts";
-		$sth = mysql_query ( $query );
-		$rows = array ();
-		while ( $r = mysql_fetch_assoc ( $sth ) ) {
-			$rows [] = $r;
+		$cache = "cache/get_podcasts.html";
+		$expire = time () - 3600;
+		
+		if (file_exists ( $cache ) && filemtime ( $cache ) > $expire) {
+			readfile ( $cache );
+		} else {
+			ob_start ();
+			$query = "SELECT * FROM podcasts";
+			$sth = mysql_query ( $query );
+			$rows = array ();
+			while ( $r = mysql_fetch_assoc ( $sth ) ) {
+				$rows [] = $r;
+			}
+			echo json_encode ( $rows );
+			
+			$page = ob_get_contents ();
+			ob_end_clean ();
+			
+			file_put_contents ( $cache, $page );
+			echo $page;
 		}
-		echo json_encode ( $rows );
 	} 
 
 	else if (isset ( $_GET ['episodes'] )) {
-		$query = "SELECT * FROM episodes WHERE id_podcast = " . $_GET ['episodes'];
-		$sth = mysql_query ( $query );
-		$rows = array ();
-		while ( $r = mysql_fetch_assoc ( $sth ) ) {
-			$rows [] = $r;
+		$cache = "cache/get_episodes_".$_GET ['episodes'].".html";
+		$expire = time () - 600;
+		
+		if (file_exists ( $cache ) && filemtime ( $cache ) > $expire) {
+			readfile ( $cache );
+		} else {
+			ob_start ();
+			$query = "SELECT * FROM episodes WHERE id_podcast = " . $_GET ['episodes'];
+			$sth = mysql_query ( $query );
+			$rows = array ();
+			while ( $r = mysql_fetch_assoc ( $sth ) ) {
+				$rows [] = $r;
+			}
+			echo json_encode ( $rows );
+			
+			$page = ob_get_contents ();
+			ob_end_clean ();
+				
+			file_put_contents ( $cache, $page );
+			echo $page;
 		}
-		echo json_encode ( $rows );
 	}
 
 } else {

@@ -6,3 +6,5 @@
 .buildpath
 
 .settings/
+
+cache/
