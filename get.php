@@ -1,10 +1,9 @@
 <?php
 
 include ('bdd_connect.php');
-
 connexion ( 'webserv' );
 
-if (isset ( $_GET ['key'] ) && !mysql_query ( "SELECT * FROM api_key WHERE key='" . $_GET ['key'] . "'" ) ) {
+if (isset($_GET['key']) && mysql_num_rows(mysql_query ( "SELECT * FROM `api_key`  WHERE token = '" . $_GET['key'] . "'" )) != 0) {
 	
 	if (isset ( $_GET ['podcasts'] )) {
 		$query = "SELECT * FROM podcasts";
@@ -25,7 +24,9 @@ if (isset ( $_GET ['key'] ) && !mysql_query ( "SELECT * FROM api_key WHERE key='
 		}
 		echo json_encode ( $rows );
 	}
+
 } else {
 	echo "{\"erreur\":\"API Key\"}";
 }
+
 ?>
