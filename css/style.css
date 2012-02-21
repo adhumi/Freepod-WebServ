@@ -3,3 +3,11 @@
 .first {
 	margin-top:50px;
 }
+
+.clear {
+	clear:both;
+}
+
+.navbar-fixed-top .brand {
+	color:#000;
+}

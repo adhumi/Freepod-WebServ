@@ -16,20 +16,16 @@ while ( $row = mysql_fetch_row ( $result ) ) {
 
 <div class="container first">
 	<div class="row">
-		<div class="span3 wall">
-			<ul class="nav nav-list">
-				<li><a href="index2.php"><i class="icon-home"></i>Home</a></li>
-
-				<li class="nav-header">Outils</li>
-				<li><a href="podcasts.php"><i
-						class="icon-th-list"></i> Tous les podcasts</a></li>
-				<li><a href="episodes.php"><i class="icon-music"></i> Tous les
-						&eacute;pisodes</a></li>
-				<li><a href="#"><i class="icon-plus"></i> Ajout d'un podcast</a></li>
-				<li><a href="#"><i class="icon-signal"></i> Statistiques</a></li>
-			</ul>
-		</div>
+		<?php include 'inc-menu.php'; ?>
 		<div class="span9">
+			<?php if (isset($_GET['success_sync'])) { ?>
+			<div class="alert alert-success alert-block">
+				<a class="close" data-dismiss="alert">×</a>
+				<h4 class="alert-heading">Terminé</h4>
+				La synchronisation a été effectuée correctement. Inutile de
+				reproduire l'opération.
+			</div>
+			<?php } ?>
 			<div class="page-header">
 				<h1><?php echo $row[1]; ?></h1>
 			</div>
@@ -46,28 +42,37 @@ while ( $row = mysql_fetch_row ( $result ) ) {
 					<p><?php echo $row[3]; ?></p>
 				</div>
 				<div class="span2">
+					<?php if ($row[4] == "Explicit") { ?>
 					<span class="label label-important pull-right"><?php echo $row[4]; ?></span>
+					<?php } elseif ($row[4] == "Clean") { ?>
+					<span class="label label-success pull-right"><?php echo $row[4]; ?></span>
+					<?php } elseif ($row[4] == "No") { ?>
+					<span class="label label-info pull-right"><?php echo $row[4]; ?></span>
+					<?php } ?>
 				</div>
 			</div>
-
-			<h6>Flux RSS (URL)</h6>
-			<pre><?php echo $row[2]; ?></pre>
-
 			<div class="row">
 				<div class="span5">
+					<h6>Flux RSS (URL)</h6>
+					<pre><?php echo $row[2]; ?></pre>
+
 					<h6>Site du podcast (URL)</h6>
 					<pre><?php echo $row[5]; ?></pre>
 
 					<h6>Page Freepod du podcast (URL)</h6>
 					<pre><?php echo $row[6]; ?></pre>
 
-					<h6>Derni&egrave;re mise &agrave; jour du flux</h6>
+					<h6>Derni&egrave;re modification du flux RSS</h6>
 					<p><?php echo $row[7]; ?></p>
 
 					<h6>Derni&egrave;re synchronisation avec la base de donn&eacute;es</h6>
 					<p><?php echo $row[8]; ?></p>
-					
-					<a href="sync.php?id=<?php echo $row[0]; ?>" class="btn btn-warning btn-large pull-right"><i class="icon-refresh icon-white"></i> Synchroniser maintenant</a>
+					<p>
+						<a href="podcast-edit.php?id=<?php echo $row[0]; ?>"
+							class="btn btn-warning btn-large ">Modifier</a> <a
+							href="sync.php?id=<?php echo $row[0]; ?>"
+							class="btn btn-primary btn-large ">Synchroniser maintenant</a>
+					</p>
 				</div>
 				<div class="span4">
 					<h6>Logo normal</h6>
@@ -76,12 +81,41 @@ while ( $row = mysql_fetch_row ( $result ) ) {
 					</a>
 				</div>
 			</div>
+			<div class="row first">
+				<h6 class="span7">Tous les épisodes de <?php echo $row[1]; ?></h6>
+				<table class="span9 table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nom</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php
+	
+	$query = "SELECT * FROM episodes WHERE id_podcast = " . $_GET ['id'] . " ORDER BY pubDate DESC";
+	$result2 = mysql_query ( $query );
+	
+	while ( $row_episode = mysql_fetch_row ( $result2 ) ) {
+		echo "<tr><td>" . $row_episode [0] . "</td>";
+		echo "<td><a href=\"" . $row_episode [3] . "\">" . $row_episode [2] . "</a></td>";
+		echo "<td>" . $row_episode [6] . "</td></tr>";
+	}
+	?>
+				</tbody>
+				</table>
+			</div>
+			<div class="row first">
+				<a href="podcast-delete.php?id=<?php echo $_GET ['id']; ?>" class="btn btn-mini btn-danger pull-right"><i class="icon-warning-sign icon-white"></i> Supprimer</a>
+			</div>
 
 		</div>
 	</div>
 </div>
-</body>
-</html>
+<?php
+	include 'inc-footer.php';
+	?>
 <?php
 }
 ?>

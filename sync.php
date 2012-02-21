@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (!$_SESSION['auth']) {
+	header('Location: index.php');
+} 
 
 include ('bdd_connect.php');
 connexion ( 'webserv' );
@@ -14,12 +18,6 @@ if (isset ( $_GET ['id'] )) {
 	 * On balaye la liste des podcasts
 	 */
 	while ( $row = mysql_fetch_row ( $result ) ) {
-		/*
-		 * Affichage du nom et de l'URL du podcast
-		 */
-		echo "<h1>" . $row [1] . "</h1>";
-		echo "<h2>" . $row [2] . "</h2><br/>";
-		
 		$xml = simplexml_load_file ( $row [2] );
 		
 		/*
@@ -46,6 +44,7 @@ if (isset ( $_GET ['id'] )) {
 				$episodeExistsInBDD = false;
 				$query = "SELECT * FROM episodes WHERE url = '" . $item->enclosure->attributes ()->url . "' AND pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "'";
 				$episode = mysql_query ( $query );
+				
 				while ( $row_episode = mysql_fetch_row ( $episode ) ) {
 					$episodeExistsInBDD = true;
 				}
@@ -54,22 +53,24 @@ if (isset ( $_GET ['id'] )) {
 					// Si l'épisode est déjà présent dans la base de données, on
 					// met
 					// à jour les données (elles ont peut-être été modifiées)
-					echo "Mise à jour des informations pour " . $item->title . "<br/>";
-					$query = "UPDATE episodes (title, type, description, author, explicite, duration, image, keywords)
-					VALUES ('" . addslashes ( $item->title ) . "',
-					'" . $item->enclosure->attributes ()->type . "',
-					'" . addslashes ( $item->description ) . "',
-					'" . addslashes ( $itunes->author ) . "',
-					'" . $itunes->explicit . "',
-					'" . $itunes->duration . "',
-					'" . $img . "',
-					'" . addslashes ( $itunes->keywords ) . "')";
+					$query = "UPDATE episodes SET
+							id_podcast = '" . $row [0] . "', 
+							title = '" . addslashes ( $item->title ) . "', 
+							url = '" . $item->enclosure->attributes ()->url . "', 
+							type = '" . $item->enclosure->attributes ()->type . "', 
+							description = '" . addslashes ( $item->description ) . "', 
+							pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "', 
+							author = '" . addslashes ( $itunes->author ) . "', 
+							explicite = '" . $itunes->explicit . "', 
+							duration = '" . $itunes->duration . "', 
+							image = '" . $img . "', 
+							keywords = '" . addslashes ( $itunes->keywords ) . "'
+						WHERE id = " . $row_episode[0];
 					mysql_query ( $query );
 				} else {
 					// Si l'épisode n'est pas présent dans la base, il est
 					// inséré
 					// normalement
-					echo "Insertion des informations pour un nouvel épisode : " . $item->title . "<br/>";
 					$query = "INSERT INTO episodes (id_podcast, title, url, type, description, pubDate, author, explicite, duration, image, keywords)
 					VALUES ('" . $row [0] . "',
 					'" . addslashes ( $item->title ) . "',
@@ -91,7 +92,7 @@ if (isset ( $_GET ['id'] )) {
 		 * On vérifie pour le podcast i que le tous les épisodes de la base de
 		 * données existent toujours dans le flux
 		 */
-		$query = "SELECT * FROM episodes WHERE id_podcast = " . $row [0];
+		$query = "SELECT * FROM episodes WHERE id_podcast = " . $row [0] . " ORDER BY pubDate";
 		$episode = mysql_query ( $query );
 		while ( $row_episode = mysql_fetch_row ( $episode ) ) {
 			$episodeExistsInXML = false;
@@ -110,15 +111,19 @@ if (isset ( $_GET ['id'] )) {
 			
 			if ($episodeExistsInXML) {
 				// On fait rien, c'est toujours disponible
-				echo "\"" . $row_episode [2] . "\" existe toujours dans le flux RSS<br/>";
 			} else {
 				// On supprime de la base de données
-				echo "<b>\"" . $row_episode [2] . "\" n'existe plus dans le flux RSS</b><br/>";
 				$query = "DELETE FROM episodes WHERE url = '" . $item->enclosure->attributes ()->url . "' AND pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "'";
 			}
+			
+			$query = "UPDATE podcasts SET lastUpdate = '".$row_episode[6]."', lastSynch = now()
+					WHERE id = " . $row_episode[1];
+			mysql_query ( $query );
 		}
 	}
-} elseif (isset ( $_GET ['key'] ) && mysql_num_rows ( mysql_query ( "SELECT * FROM `api_key`  WHERE token = '" . $_GET ['key'] . "' AND authorized = 1" ) ) != 0) {
+	
+	header('Location: podcast.php?id='.$_GET ['id'] . '&success_sync');
+} else {
 	/*
 	 * On récupère la liste des podcasts dans la base de données
 	 */
@@ -160,6 +165,7 @@ if (isset ( $_GET ['id'] )) {
 				 */
 				$episodeExistsInBDD = false;
 				$query = "SELECT * FROM episodes WHERE url = '" . $item->enclosure->attributes ()->url . "' AND pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "'";
+								
 				$episode = mysql_query ( $query );
 				while ( $row_episode = mysql_fetch_row ( $episode ) ) {
 					$episodeExistsInBDD = true;
@@ -169,22 +175,23 @@ if (isset ( $_GET ['id'] )) {
 					// Si l'épisode est déjà présent dans la base de données, on
 					// met
 					// à jour les données (elles ont peut-être été modifiées)
-					echo "Mise à jour des informations pour " . $item->title . "<br/>";
-					$query = "UPDATE episodes (title, type, description, author, explicite, duration, image, keywords)
-						VALUES ('" . addslashes ( $item->title ) . "',
-								'" . $item->enclosure->attributes ()->type . "',
-								'" . addslashes ( $item->description ) . "',
-								'" . addslashes ( $itunes->author ) . "',
-								'" . $itunes->explicit . "',
-								'" . $itunes->duration . "',
-								'" . $img . "',
-								'" . addslashes ( $itunes->keywords ) . "')";
+					$query = "INSERT INTO episodes SET
+							id_podcast = '" . $row [0] . "', 
+							title = '" . addslashes ( $item->title ) . "', 
+							url = '" . $item->enclosure->attributes ()->url . "', 
+							type = '" . $item->enclosure->attributes ()->type . "', 
+							description = '" . addslashes ( $item->description ) . "', 
+							pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "', 
+							author = '" . addslashes ( $itunes->author ) . "', 
+							explicite = '" . $itunes->explicit . "', 
+							duration = '" . $itunes->duration . "', 
+							image = '" . $img . "', 
+							keywords = '" . addslashes ( $itunes->keywords ) . "'";
 					mysql_query ( $query );
 				} else {
 					// Si l'épisode n'est pas présent dans la base, il est
 					// inséré
 					// normalement
-					echo "Insertion des informations pour un nouvel épisode : " . $item->title . "<br/>";
 					$query = "INSERT INTO episodes (id_podcast, title, url, type, description, pubDate, author, explicite, duration, image, keywords)
 						VALUES ('" . $row [0] . "',
 						'" . addslashes ( $item->title ) . "',
@@ -225,15 +232,12 @@ if (isset ( $_GET ['id'] )) {
 			
 			if ($episodeExistsInXML) {
 				// On fait rien, c'est toujours disponible
-				echo "\"" . $row_episode [2] . "\" existe toujours dans le flux RSS<br/>";
 			} else {
 				// On supprime de la base de données
-				echo "<b>\"" . $row_episode [2] . "\" n'existe plus dans le flux RSS</b><br/>";
 				$query = "DELETE FROM episodes WHERE url = '" . $item->enclosure->attributes ()->url . "' AND pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "'";
 			}
 		}
 	}
-} else {
-	echo "Aucune tâche n'a été effectuée. Contactez un administrateur.";
+	header('Location: podcasts.php');
 }
 ?>

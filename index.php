@@ -51,5 +51,6 @@ if ($_SESSION['auth']) {
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+<?php
+include 'inc-footer.php';
+?>

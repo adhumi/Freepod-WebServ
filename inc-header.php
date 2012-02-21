@@ -23,7 +23,7 @@ if (!$_SESSION['auth']) {
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#"> Freepod </a>
+				<a class="brand" href="index2.php"> Freepod </a>
 				<ul class="nav pull-right">
 					<li class="divider-vertical"></li>
 					<li class="dropdown">

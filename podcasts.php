@@ -4,19 +4,7 @@ include 'inc-header.php';
 
 <div class="container first">
 	<div class="row">
-		<div class="span3 wall">
-			<ul class="nav nav-list">
-				<li><a href="index2.php"><i class="icon-home"></i>Home</a></li>
-
-				<li class="nav-header">Outils</li>
-				<li class="active"><a href="podcasts.php"><i
-						class="icon-th-list icon-white"></i> Tous les podcasts</a></li>
-				<li><a href="episodes.php"><i class="icon-music"></i> Tous les
-						&eacute;pisodes</a></li>
-				<li><a href="#"><i class="icon-plus"></i> Ajout d'un podcast</a></li>
-				<li><a href="#"><i class="icon-signal"></i> Statistiques</a></li>
-			</ul>
-		</div>
+		<?php include 'inc-menu.php'; ?>
 		<div class="span9">
 			<div class="page-header">
 				<h1>Tous les podcasts</h1>
@@ -55,5 +43,6 @@ include 'inc-header.php';
 		</div>
 	</div>
 </div>
-</body>
-</html>
+<?php
+include 'inc-footer.php';
+?>
