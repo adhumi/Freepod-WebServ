@@ -29,13 +29,23 @@ if ($_SESSION['auth']) {
 	</div>
 	<div class="container first">
 		<div class="row">
-			<div class="span4 offset4 well">
-				<form method="post" action="auth.php">
+			<div class="span6 offset3 well">
+				<form method="post" action="auth.php" class="form-horizontal">
 					<fieldset>
 						<legend>Se connecter</legend>
-						<label>Login</label> <input type="text" name="login" /> <label>Password</label>
-						<input type="password" name="password" /> <input type="submit"
-							value="Connexion" />
+						<div class="control-group">
+						<label for="login">Login</label> 
+							<div class="controls">
+							<input type="text" name="login" /> 
+							</div>
+						</div>
+						<div class="control-group">
+						<label for="password">Password</label> 
+						<div class="controls">
+						<input type="password" name="password" /> <input type="submit" value="Connexion" class="btn-primary" />
+						</div> 
+						</div>
+						
 					</fieldset>
 				</form>
 			</div>
