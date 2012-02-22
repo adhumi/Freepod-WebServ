@@ -22,6 +22,14 @@ include 'inc-header.php';
 			</div>
 			<?php } ?>
 			
+			<?php if (isset($_GET['error_sql'])) { ?>
+			<div class="alert alert-error alert-block">
+				<a class="close" data-dismiss="alert">×</a>
+				<h4 class="alert-heading">Erreur SQL</h4>
+				L'erreur peut avoir été causée par plusieurs problèmes : caractères non pris en charge, pseudo déjà existant, etc.
+			</div>
+			<?php } ?>
+			
 			<div class="page-header">
 				<h1>Liste des utilisateurs</h1>
 			</div>

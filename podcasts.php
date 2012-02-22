@@ -6,6 +6,14 @@ include 'inc-header.php';
 	<div class="row">
 		<?php include 'inc-menu.php'; ?>
 		<div class="span9">
+			<?php if (isset($_GET['success_sync'])) { ?>
+			<div class="alert alert-success alert-block">
+				<a class="close" data-dismiss="alert">×</a>
+				<h4 class="alert-heading">Terminé</h4>
+				La synchronisation a été effectuée correctement. Inutile de
+				reproduire l'opération.
+			</div>
+			<?php } ?>
 			<div class="page-header">
 				<h1>Tous les podcasts</h1>
 			</div>

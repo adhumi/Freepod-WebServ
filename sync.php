@@ -143,8 +143,6 @@ if (isset ( $_GET ['id'] )) {
 		/*
 		 * Affichage du nom et de l'URL du podcast
 		 */
-		echo "<h1>" . $row [1] . "</h1>";
-		echo "<h2>" . $row [2] . "</h2><br/>";
 		
 		$xml = simplexml_load_file ( $row [2] );
 		
@@ -170,6 +168,8 @@ if (isset ( $_GET ['id'] )) {
 				 * On vérifie si l'épisode est déjà dans la BDD
 				 */
 				$episodeExistsInBDD = false;
+				$query = "SELECT * FROM episodes WHERE url = '" . $item->enclosure->attributes ()->url . "' AND pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "'";
+				$episode = mysql_query ( $query );
 				$num_episode = "";
 				while ( $row_episode = mysql_fetch_row ( $episode ) ) {
 					$episodeExistsInBDD = true;
@@ -243,6 +243,6 @@ if (isset ( $_GET ['id'] )) {
 			}
 		}
 	}
-	header('Location: podcasts.php');
+	header('Location: podcasts.php?success_sync');
 }
 ?>

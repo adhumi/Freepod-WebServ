@@ -14,9 +14,13 @@ if ($_POST ['password1'] == $_POST ['password2'] && $_POST ['login'] != "" && $_
 	
 	$query = "INSERT INTO users (login, password, mail)
 		VALUES ('" . $_POST ['login'] . "', '" . $pass . "', '" . $_POST ['mail'] . "')";
-	mysql_query ( $query );
+	$success_query = mysql_query ( $query );
 	
-	header ( 'Location: users.php?success_add' );
+	if ($success_query) {
+		header ( 'Location: users.php?success_add' );
+	} else {
+		header ( 'Location: users.php?error_sql' );
+	}
 } else {
 	header ( 'Location: users.php?error_add' );
 }
