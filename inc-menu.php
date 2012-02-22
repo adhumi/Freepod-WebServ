@@ -15,9 +15,12 @@
 		<li><a href="#"><i class="icon-envelope"></i> Coming soon</a></li>
 		<li class="nav-header">Tools</li>
 		<li><a href="users.php"><i class="icon-user"></i> Liste des utilisateurs</a></li>
+		<li><a href="status.php"><i class="icon-eye-open"></i> Statut</a></li>
 		<li class="nav-header">Documentation</li>
 		<li><a href="doc-get.php"><i class="icon-book"></i> Méthodes GET</a></li>
 		<li><a href="doc-ping.php"><i class="icon-book"></i> Méthodes Ping</a></li>
 		
 	</ul>
 </div>
+
+<!-- 4e2e322f522a5c38523f577621757b2849572a225577495e54357a354e -->

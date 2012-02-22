@@ -13,6 +13,10 @@ include 'inc-header.php';
 				<li><a href="index2.php">Home</a> <span class="divider">/</span></li>
 				<li class="active"><a href="podcasts.php">Tous les podcasts</a></li>
 			</ul>
+			<div class="btn-toolbar">
+				<a href="http://webserv.freepod.net/sync.php" class="btn btn-large">Tout
+					synchroniser</a>
+			</div>
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>

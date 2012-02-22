@@ -15,8 +15,8 @@ if ($_SESSION['auth']) {
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css"
 	type="text/css" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
-<script href="bootstrap.min.js" type="text/javascript"></script>
-<script href="jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="bootstrap.min.js" type="text/javascript"></script>
+<script src="jquery-1.7.1.min.js" type="text/javascript"></script>
 <title>Webservice Freepod</title>
 </head>
 <body>
@@ -51,6 +51,5 @@ if ($_SESSION['auth']) {
 			</div>
 		</div>
 	</div>
-<?php
-include 'inc-footer.php';
-?>
+</body>
+</html>

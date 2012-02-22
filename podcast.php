@@ -107,7 +107,7 @@ while ( $row = mysql_fetch_row ( $result ) ) {
 				</table>
 			</div>
 			<div class="row first">
-				<a href="podcast-delete.php?id=<?php echo $_GET ['id']; ?>" class="btn btn-mini btn-danger pull-right"><i class="icon-warning-sign icon-white"></i> Supprimer</a>
+				<a href="podcast-delete.php?id=<?php echo $_GET ['id']; ?>" class="btn btn-mini btn-danger pull-right" onclick="return confirm ('Etes vous sûr de vouloir supprimer ce podcast ?');"><i class="icon-warning-sign icon-white"></i> Supprimer</a>
 			</div>
 
 		</div>

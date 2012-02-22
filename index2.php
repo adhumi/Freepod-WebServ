@@ -13,35 +13,30 @@ include 'inc-header.php';
 			<div class="row">
 				<div class="span3">
 					<div class="thumbnail">
-						<p>
 							<a href="podcasts.php"> <img src="img/podcasts.jpg" alt="" />
 							</a>
-						</p>
-						<a href="podcasts.php" class="btn btn-info btn-large span2">Gérer
+							<div class="caption">
+						<a href="podcasts.php" class="btn btn-large">Gérer
 							les podcasts</a>
-						<div class="clear"></div>
+						</div>
 					</div>
 				</div>
 				<div class="span3">
 					<div class="thumbnail">
-						<p>
 							<a href="#"> <img src="img/notif.jpg" alt="" />
 							</a>
-						</p>
-						<a href="#" class="btn btn-info btn-large span2">Envoyer une
-							notification</a>
-						<div class="clear"></div>
+						<div class="caption">
+						<a href="#" class="btn btn-large">Envoyer une
+							notification</a></div>
 					</div>
 				</div>
 				<div class="span3">
 					<div class="thumbnail">
-						<p>
-							<a href="#"> <img src="img/stats.jpg" alt="" />
+							<a href="stats.php"> <img src="img/stats.jpg" alt="" />
 							</a>
-						</p>
-						<a href="#" class="btn btn-info btn-large span2">Voir les
-							statistiques</a>
-						<div class="clear"></div>
+						<div class="caption">
+						<a href="stats.php" class="btn btn-large">Voir les
+							statistiques</a></div>
 					</div>
 				</div>
 			</div>

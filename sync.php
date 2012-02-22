@@ -20,6 +20,7 @@ if (isset ( $_GET ['id'] )) {
 	while ( $row = mysql_fetch_row ( $result ) ) {
 		$xml = simplexml_load_file ( $row [2] );
 		
+		
 		/*
 		 * On balaye le XML, pour chaque <item></item>
 		 */
@@ -38,21 +39,26 @@ if (isset ( $_GET ['id'] )) {
 					$img = $row[9];
 				}
 				
+				//echo "<pre>";
+				//print_r($item);
+				//print_r($itunes);
+				//echo "</pre><hr>";
+				
 				/*
 				 * On vérifie si l'épisode est déjà dans la BDD
 				 */
 				$episodeExistsInBDD = false;
 				$query = "SELECT * FROM episodes WHERE url = '" . $item->enclosure->attributes ()->url . "' AND pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "'";
 				$episode = mysql_query ( $query );
-				
+				$num_episode = "";
 				while ( $row_episode = mysql_fetch_row ( $episode ) ) {
 					$episodeExistsInBDD = true;
+					$num_episode = $row_episode[0];
 				}
 				
 				if ($episodeExistsInBDD) {
 					// Si l'épisode est déjà présent dans la base de données, on
-					// met
-					// à jour les données (elles ont peut-être été modifiées)
+					// met à jour les données (elles ont peut-être été modifiées)
 					$query = "UPDATE episodes SET
 							id_podcast = '" . $row [0] . "', 
 							title = '" . addslashes ( $item->title ) . "', 
@@ -65,12 +71,12 @@ if (isset ( $_GET ['id'] )) {
 							duration = '" . $itunes->duration . "', 
 							image = '" . $img . "', 
 							keywords = '" . addslashes ( $itunes->keywords ) . "'
-						WHERE id = " . $row_episode[0];
+						WHERE id = " . $num_episode;
 					mysql_query ( $query );
+					//echo $query . "<hr>";
 				} else {
 					// Si l'épisode n'est pas présent dans la base, il est
-					// inséré
-					// normalement
+					// inséré normalement
 					$query = "INSERT INTO episodes (id_podcast, title, url, type, description, pubDate, author, explicite, duration, image, keywords)
 					VALUES ('" . $row [0] . "',
 					'" . addslashes ( $item->title ) . "',
@@ -164,18 +170,16 @@ if (isset ( $_GET ['id'] )) {
 				 * On vérifie si l'épisode est déjà dans la BDD
 				 */
 				$episodeExistsInBDD = false;
-				$query = "SELECT * FROM episodes WHERE url = '" . $item->enclosure->attributes ()->url . "' AND pubDate = '" . date ( 'Y-m-d H:i:s', strtotime ( $item->pubDate ) ) . "'";
-								
-				$episode = mysql_query ( $query );
+				$num_episode = "";
 				while ( $row_episode = mysql_fetch_row ( $episode ) ) {
 					$episodeExistsInBDD = true;
+					$num_episode = $row_episode[0];
 				}
 				
 				if ($episodeExistsInBDD) {
 					// Si l'épisode est déjà présent dans la base de données, on
-					// met
-					// à jour les données (elles ont peut-être été modifiées)
-					$query = "INSERT INTO episodes SET
+					// met à jour les données (elles ont peut-être été modifiées)
+					$query = "UPDATE episodes SET
 							id_podcast = '" . $row [0] . "', 
 							title = '" . addslashes ( $item->title ) . "', 
 							url = '" . $item->enclosure->attributes ()->url . "', 
@@ -186,7 +190,8 @@ if (isset ( $_GET ['id'] )) {
 							explicite = '" . $itunes->explicit . "', 
 							duration = '" . $itunes->duration . "', 
 							image = '" . $img . "', 
-							keywords = '" . addslashes ( $itunes->keywords ) . "'";
+							keywords = '" . addslashes ( $itunes->keywords ) . "'
+						WHERE id = " . $num_episode;
 					mysql_query ( $query );
 				} else {
 					// Si l'épisode n'est pas présent dans la base, il est

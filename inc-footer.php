@@ -1,7 +1,6 @@
 <div class="container">
 <footer class="footer modal-footer first">
-	<p>R&eacute;alis&eacute; par <a href="http://www.adhumi.fr">adhumi</a></p>
-	<p><a href="test.php">Tests</a></p>
+	<p><a href="http://www.freepod.net">Freepod</a></p>
 </footer>
 </div>
 </body>

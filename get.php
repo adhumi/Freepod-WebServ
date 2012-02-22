@@ -3,6 +3,12 @@
 include ('bdd_connect.php');
 connexion ( 'webserv' );
 
+// Si l'appelant n'est pas le serveur de Freepod (éviter les requêtes de status.php) 
+if ($_SERVER ['REMOTE_ADDR'] != "46.105.123.206") {
+	require_once ($_SERVER ['DOCUMENT_ROOT'] . "/class/Statistiques.php");
+	Statistiques::insertClientInfos ();
+}
+
 if (isset ( $_GET ['key'] ) && mysql_num_rows ( mysql_query ( "SELECT * FROM `api_key`  WHERE token = '" . $_GET ['key'] . "'" ) ) != 0) {
 	
 	if (isset ( $_GET ['podcasts'] )) {
@@ -30,7 +36,7 @@ if (isset ( $_GET ['key'] ) && mysql_num_rows ( mysql_query ( "SELECT * FROM `ap
 	} 
 
 	else if (isset ( $_GET ['episodes'] )) {
-		$cache = "cache/get_episodes_".$_GET ['episodes'].".html";
+		$cache = "cache/get_episodes_" . $_GET ['episodes'] . ".html";
 		$expire = time () - 600;
 		
 		if (file_exists ( $cache ) && filemtime ( $cache ) > $expire) {
@@ -47,7 +53,7 @@ if (isset ( $_GET ['key'] ) && mysql_num_rows ( mysql_query ( "SELECT * FROM `ap
 			
 			$page = ob_get_contents ();
 			ob_end_clean ();
-				
+			
 			file_put_contents ( $cache, $page );
 			echo $page;
 		}
