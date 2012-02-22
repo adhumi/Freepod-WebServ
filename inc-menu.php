@@ -10,7 +10,9 @@
 				&eacute;pisodes</a></li>
 		<li><a href="podcast-new.php"><i class="icon-plus"></i> Ajout d'un podcast</a></li>
 		<li class="nav-header">Statistiques</li>
-		<li><a href="stats.php"><i class="icon-signal"></i> Stats générales</a></li>
+		<li><a href="stats.php"><i class="icon-signal"></i> Statistiques d'utilisation</a></li>
+		<li><a href="stats-podcasts.php"><i class="icon-signal"></i> Statistiques sur les podcasts</a></li>
+		<li><a href="stats-tests.php"><i class="icon-signal"></i> Expérimentations</a></li>
 		<li class="nav-header">Notifications</li>
 		<li><a href="#"><i class="icon-envelope"></i> Coming soon</a></li>
 		<li class="nav-header">Tools</li>
