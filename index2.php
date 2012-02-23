@@ -5,6 +5,14 @@ include 'inc-header.php';
 	<div class="row">
 		<?php include 'inc-menu.php'; ?>
 		<div class="span9">
+			<?php if (isset($_GET['feedback_success'])) { ?>
+			<div class="alert alert-success alert-block">
+				<a class="close" data-dismiss="alert">×</a>
+				<h4 class="alert-heading">Terminé</h4>
+				Votre message a été correctement envoyé.
+			</div>
+			<?php } ?>
+			
 			<div class="hero-unit">
 				<h1>Freepod admin</h1>
 				<p>Bienvenue dans l'espace d'administration des applications

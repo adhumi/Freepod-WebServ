@@ -25,6 +25,7 @@ if (!$_SESSION['auth']) {
 			<div class="container">
 				<a class="brand" href="index2.php"> Freepod </a>
 				<ul class="nav pull-right">
+					<li><a href="feedback.php">Feedback</a></li>
 					<li class="divider-vertical"></li>
 					<li class="dropdown">
 						<a href="#user" class="dropdown-toggle" data-toggle="dropdown"> <? echo $_SESSION['login']; ?> <b class="caret"></b></a>
