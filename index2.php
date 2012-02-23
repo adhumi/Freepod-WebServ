@@ -14,7 +14,7 @@ include 'includes/header.php';
 			<?php } ?>
 			
 			<div class="hero-unit">
-				<h1>Freepod admin</h1>
+				<h1>Admin Freepod</h1>
 				<p>Bienvenue dans l'espace d'administration des applications
 					Freepod.</p>
 			</div>

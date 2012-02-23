@@ -1,17 +1,20 @@
 <?php
-session_start();
-if (!$_SESSION['auth']) {
-	header('Location: index.php');
-} 
+session_start ();
+if (! $_SESSION ['auth']) {
+	header ( 'Location: index.php' );
+}
 
 include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
-$query = "INSERT INTO podcasts (nom, url_flux, description, explicite, url_site, url_freepod, logo_normal)
-		VALUES ('".htmlspecialchars($_POST['titre'])."', '".$_POST['url_rss']."', '". htmlspecialchars($_POST['description'])."', '".$_POST['explicite']."',
-		'".$_POST['url_site']."', '".$_POST['url_freepod']."', '".$_POST['logo']."')";
-mysql_query ( $query );
+require_once ($_SERVER ['DOCUMENT_ROOT'] . "/class/Podcast.php");
 
-header ( 'Location: podcasts.php');
+$id = 0;
+if (isset($_POST['id_podcast'])) {
+	$id = $_POST['id_podcast'];
+}
+Podcast::insertPodcast ( $id, $_POST ['titre'], $_POST ['url_rss'], $_POST ['description'], $_POST ['explicite'], $_POST ['url_site'], $_POST ['url_freepod'], $_POST ['logo'] );
+
+header ( 'Location: podcast.php?id=' . $id );
 
 ?>

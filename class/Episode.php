@@ -1,6 +1,14 @@
 <?php
 
 class Episode {
+	/**
+	 * Récupère les informations des épisodes.
+	 * 
+	 * @param int $id Identifiant du podcast
+	 * @param unknown_type $orderBy Champ à trier (defaut : id)
+	 * @param unknown_type $order Ordre du tri (defaut : ASC)
+	 * @return array
+	 */
 	static function getEpisodesByPodcasts($id = 0, $orderBy = "id", $order = "ASC") {
 		$tmp =array();
 		if ($id == 0) {

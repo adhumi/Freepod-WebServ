@@ -29,9 +29,11 @@ class Statistiques {
 		
 		$query = "INSERT INTO statistiques SET
 			language = '" . $_SERVER ['HTTP_ACCEPT_LANGUAGE'] . "',
-			connection = '" . $_SERVER ['HTTP_CONNECTION'] . "',
-			referer = '" . $_SERVER ['HTTP_REFERER'] . "',
-			user_agent = '" . $_SERVER ['HTTP_USER_AGENT'] . "',
+			connection = '" . $_SERVER ['HTTP_CONNECTION'] . "',";
+		if (isset($_SERVER ['HTTP_REFERER'])) {
+			$query .= "referer = '" . $_SERVER ['HTTP_REFERER'] . "',";
+		}
+		$query .= "user_agent = '" . $_SERVER ['HTTP_USER_AGENT'] . "',
 			ip_client = '" . $_SERVER ['REMOTE_ADDR'] . "',
 			script = '" . $_SERVER ['SCRIPT_NAME'] . "',
 			url_page = '" . $_SERVER ['SCRIPT_NAME'] . "',
@@ -47,7 +49,8 @@ class Statistiques {
 	 * Retourne un array contenant les statistiques par navigateur sur un nombre
 	 * de jours donnés (Default : 30)
 	 *
-	 * @param $nbJours int       	
+	 * @param $nbJours int
+	 * @return array      	
 	 */
 	static function getBrowserStats($nbJours = 30) {
 		$tmp = array ();
@@ -63,7 +66,8 @@ class Statistiques {
 	 * Retourne un array contenant les statistiques des OS sur un nombre
 	 * de jours donnés (Default : 30)
 	 *
-	 * @param $nbJours int       	
+	 * @param $nbJours int
+	 * @return array       	
 	 */
 	static function getPlatformStats($nbJours = 30) {
 		$tmp = array ();
@@ -79,7 +83,8 @@ class Statistiques {
 	 * Retourne un array contenant les statistiques de requêtes quotidennes sur
 	 * un nombre de jours donnés
 	 * 
-	 * @param $nbJours int       	
+	 * @param $nbJours int
+	 * @return array  	
 	 */
 	static function getRequestStats($nbJours = 30) {
 		$tmp = array ();
