@@ -4,7 +4,7 @@ if (! $_SESSION ['auth']) {
 	header ( 'Location: index.php' );
 }
 
-include ('bdd_connect.php');
+include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
 $pass = "";

@@ -1,6 +1,6 @@
 <?php
 
-include ('bdd_connect.php');
+include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
 // Si l'appelant n'est pas le serveur de Freepod (éviter les requêtes de status.php) 

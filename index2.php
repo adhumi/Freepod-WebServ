@@ -1,9 +1,9 @@
 <?php
-include 'inc-header.php';
+include 'includes/header.php';
 ?>
 <div class="container first">
 	<div class="row">
-		<?php include 'inc-menu.php'; ?>
+		<?php include 'includes/menu.php'; ?>
 		<div class="span9">
 			<?php if (isset($_GET['feedback_success'])) { ?>
 			<div class="alert alert-success alert-block">
@@ -34,7 +34,7 @@ include 'inc-header.php';
 							<a href="#"> <img src="img/notif.jpg" alt="" />
 							</a>
 						<div class="caption">
-						<a href="#" class="btn btn-large">Envoyer une
+						<a href="#" class="btn btn-large disabled" onclick="return false;">Envoyer une
 							notification</a></div>
 					</div>
 				</div>
@@ -47,10 +47,11 @@ include 'inc-header.php';
 							statistiques</a></div>
 					</div>
 				</div>
+				<?php //echo json_last_error (); ?>
 			</div>
 		</div>
 	</div>
 </div>
 <?php
-include 'inc-footer.php';
+include 'includes/footer.php';
 ?>

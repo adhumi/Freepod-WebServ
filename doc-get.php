@@ -1,9 +1,9 @@
 <?php
-include 'inc-header.php';
+include 'includes/header.php';
 ?>
 <div class="container first">
 	<div class="row">
-		<?php include 'inc-menu.php'; ?>
+		<?php include 'includes/menu.php'; ?>
 		<div class="span9">
 			<div class="page-header">
 				<h1>M&eacute;thodes GET</h1>
@@ -78,5 +78,5 @@ include 'inc-header.php';
 	</div>
 </div>
 <?php
-include 'inc-footer.php';
+include 'includes/footer.php';
 ?>

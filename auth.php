@@ -1,5 +1,5 @@
 <?php
-include ('bdd_connect.php');
+include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
 session_start ();

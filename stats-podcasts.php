@@ -1,7 +1,7 @@
 <?php
-include 'inc-header.php';
+include 'includes/header.php';
 
-include ('bdd_connect.php');
+include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
 $totalEpisodes = 0;
@@ -53,23 +53,39 @@ $episodesVideo = $totalEpisodes - $episodesAudio;
         data.addColumn('number', 'Hours per Day');
         data.addRows([
         <?php
-								$query = "SELECT COUNT(*), YEAR(pubDate), MONTH(pubDate) FROM episodes GROUP BY YEAR(PUBDATE), MONTH(pubDate)";
-								$rez = mysql_query ( $query );
-								
-								$row = mysql_fetch_row ( $rez );
-								$row = mysql_fetch_row ( $rez );
-								echo "['" . $row [2] . "/" . $row [1] . "', " . $row [0] . "]";
-								
-								$pre_month = $row [2];
-								$pre_year = $row [1];
-								
-								while ( $row = mysql_fetch_row ( $rez ) ) {
-									echo ",['" . $row [2] . "/" . $row [1] . "', " . $row [0] . "]";
-									
-									$pre_month = $row [2];
-									$pre_year = $row [1];
-								}
-								?>
+			$query = "SELECT COUNT(*), YEAR(pubDate), MONTH(pubDate) FROM episodes GROUP BY YEAR(PUBDATE), MONTH(pubDate)";
+			$rez = mysql_query ( $query );
+			
+			$row = mysql_fetch_row ( $rez );
+			$row = mysql_fetch_row ( $rez );
+			echo "['" . $row [2] . "/" . $row [1] . "', " . $row [0] . "]";
+			
+			$pre_month = $row [2];
+			$pre_year = $row [1];
+			
+			date_default_timezone_set ( 'CET' );
+			
+			while ( $row = mysql_fetch_row ( $rez ) ) {
+				$begin = new DateTime ( $pre_year . '-' . $pre_month . '-01' );
+				$end = new DateTime ( $row [1] . '-' . $row [2] . '-01' );
+				
+				$interval = DateInterval::createFromDateString ( '1 month' );
+				$period = new DatePeriod ( $begin, $interval, $end );
+				
+				foreach ( $period as $dt ) {
+					echo ",['" . $dt->format ( "m/Y" ) . "', 0]\n";
+				}
+				echo ",['" . $row [2] . "/" . $row [1] . "', " . $row [0] . "]\n";
+				
+				if ($row[2] == 12) {
+					$pre_month = 1;
+					$pre_year = $row [1] + 1;
+				} else {
+					$pre_month = $row [2] + 1;
+					$pre_year = $row [1];
+				}
+			}
+		?>
         ]);
 
         var options = {
@@ -84,7 +100,7 @@ $episodesVideo = $totalEpisodes - $episodesAudio;
 
 <div class="container first">
 	<div class="row">
-		<?php include 'inc-menu.php'; ?>
+		<?php include 'includes/menu.php'; ?>
 		<div class="span9">
 			<div class="page-header">
 				<h1>Statistiques (en test)</h1>
@@ -114,5 +130,5 @@ $episodesVideo = $totalEpisodes - $episodesAudio;
 	</div>
 </div>
 <?php
-include 'inc-footer.php';
+include 'includes/footer.php';
 ?>

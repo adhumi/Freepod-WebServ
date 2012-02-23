@@ -4,7 +4,7 @@ if (!$_SESSION['auth']) {
 	header('Location: index.php');
 } 
 
-include ('bdd_connect.php');
+include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
 $query = "INSERT INTO podcasts (nom, url_flux, description, explicite, url_site, url_freepod, logo_normal)

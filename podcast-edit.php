@@ -3,9 +3,9 @@ if (! isset ( $_GET ['id'] )) {
 	header ( 'Location: podcasts.php' );
 }
 
-include 'inc-header.php';
+include 'includes/header.php';
 
-include ('bdd_connect.php');
+include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
 $query = "SELECT * FROM podcasts WHERE id = " . $_GET ['id'];
@@ -16,7 +16,7 @@ while ( $row = mysql_fetch_row ( $result ) ) {
 
 <div class="container first">
 	<div class="row">
-		<?php include 'inc-menu.php'; ?>
+		<?php include 'includes/menu.php'; ?>
 		<div class="span9">
 			<div class="page-header">
 				<h1><?php echo $row[1]; ?></h1>
@@ -103,7 +103,7 @@ while ( $row = mysql_fetch_row ( $result ) ) {
 	</div>
 </div>
 <?php
-include 'inc-footer.php';
+include 'includes/footer.php';
 ?>
 <?php
 }

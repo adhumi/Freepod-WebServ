@@ -4,8 +4,10 @@ if (!$_SESSION['auth']) {
 	header('Location: index.php');
 } 
 
-include ('bdd_connect.php');
+include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
+
+date_default_timezone_set('CET');
 
 if (isset ( $_GET ['id'] )) {
 	/*

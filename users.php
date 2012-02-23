@@ -1,10 +1,10 @@
 <?php
-include 'inc-header.php';
+include 'includes/header.php';
 ?>
 
 <div class="container first">
 	<div class="row">
-		<?php include 'inc-menu.php'; ?>
+		<?php include 'includes/menu.php'; ?>
 		<div class="span9">
 			<?php if (isset($_GET['success_add'])) { ?>
 			<div class="alert alert-success alert-block">
@@ -49,7 +49,7 @@ include 'inc-header.php';
 				</thead>
 				<tbody>
 					<?php
-					include ('bdd_connect.php');
+					include ('includes/bdd_connect.php');
 					connexion ( 'webserv' );
 					
 					$query = "SELECT * FROM users";
@@ -99,5 +99,5 @@ include 'inc-header.php';
 	</div>
 </div>
 <?php
-include 'inc-footer.php';
+include 'includes/footer.php';
 ?>

@@ -1,10 +1,10 @@
 <?php
-include 'inc-header.php';
+include 'includes/header.php';
 ?>
 
 <div class="container first">
 	<div class="row">
-		<?php include 'inc-menu.php'; ?>
+		<?php include 'includes/menu.php'; ?>
 		<div class="span9">
 			<div class="page-header">
 				<h1>Tous les &eacute;pisodes</h1>
@@ -25,7 +25,7 @@ include 'inc-header.php';
 				</thead>
 				<tbody>
 					<?php
-					include ('bdd_connect.php');
+					include ('includes/bdd_connect.php');
 					connexion ( 'webserv' );
 					
 					$query = "SELECT e.id, e.id_podcast, e.title, e.url, e.type, e.description, e.pubDate, e.author, e.explicite, e.duration, e.image, e.keywords, p.nom FROM episodes AS e, podcasts AS p WHERE e.id_podcast = p.id ORDER BY pubdate DESC";
@@ -54,5 +54,5 @@ include 'inc-header.php';
 	</div>
 </div>
 <?php
-include 'inc-footer.php';
+include 'includes/footer.php';
 ?>

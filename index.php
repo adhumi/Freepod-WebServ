@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['auth']) {
+if (isset($_SESSION['auth']) && $_SESSION['auth']) {
 	header('Location: index2.php');
 } 
 ?>
