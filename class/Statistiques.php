@@ -30,7 +30,7 @@ class Statistiques {
 		$query = "INSERT INTO statistiques SET
 			language = '" . $_SERVER ['HTTP_ACCEPT_LANGUAGE'] . "',
 			connection = '" . $_SERVER ['HTTP_CONNECTION'] . "',";
-		if (isset($_SERVER ['HTTP_REFERER'])) {
+		if (isset ( $_SERVER ['HTTP_REFERER'] )) {
 			$query .= "referer = '" . $_SERVER ['HTTP_REFERER'] . "',";
 		}
 		$query .= "user_agent = '" . $_SERVER ['HTTP_USER_AGENT'] . "',
@@ -49,12 +49,12 @@ class Statistiques {
 	 * Retourne un array contenant les statistiques par navigateur sur un nombre
 	 * de jours donnés (Default : 30)
 	 *
-	 * @param $nbJours int
-	 * @return array      	
+	 * @param $nbJours int       	
+	 * @return array
 	 */
 	static function getBrowserStats($nbJours = 30) {
 		$tmp = array ();
-		$query = "SELECT COUNT(*), browser FROM statistiques WHERE DATEDIFF(visitDate, CURRENT_DATE) >= -" . $nbJours . " GROUP BY browser";
+		$query = "SELECT COUNT(*), browser FROM statistiques WHERE DATEDIFF(visitDate, CURRENT_DATE) > -" . $nbJours . " GROUP BY browser";
 		$result = mysql_query ( $query );
 		while ( $row = mysql_fetch_row ( $result ) ) {
 			array_push ( $tmp, array ("nbVisites" => $row [0], "browser" => $row [1] ) );
@@ -66,12 +66,12 @@ class Statistiques {
 	 * Retourne un array contenant les statistiques des OS sur un nombre
 	 * de jours donnés (Default : 30)
 	 *
-	 * @param $nbJours int
-	 * @return array       	
+	 * @param $nbJours int       	
+	 * @return array
 	 */
 	static function getPlatformStats($nbJours = 30) {
 		$tmp = array ();
-		$query = "SELECT COUNT(*), platform FROM statistiques WHERE DATEDIFF(visitDate, CURRENT_DATE) >= -" . $nbJours . " GROUP BY platform";
+		$query = "SELECT COUNT(*), platform FROM statistiques WHERE DATEDIFF(visitDate, CURRENT_DATE) > -" . $nbJours . " GROUP BY platform";
 		$result = mysql_query ( $query );
 		while ( $row = mysql_fetch_row ( $result ) ) {
 			array_push ( $tmp, array ("nbVisites" => $row [0], "platform" => $row [1] ) );
@@ -82,13 +82,13 @@ class Statistiques {
 	/**
 	 * Retourne un array contenant les statistiques de requêtes quotidennes sur
 	 * un nombre de jours donnés
-	 * 
-	 * @param $nbJours int
-	 * @return array  	
+	 *
+	 * @param $nbJours int       	
+	 * @return array
 	 */
 	static function getRequestStats($nbJours = 30) {
 		$tmp = array ();
-		$query = "SELECT COUNT(*), YEAR(visitDate), MONTH(visitDate), DAY(visitDate) FROM statistiques WHERE DATEDIFF(visitDate, CURRENT_DATE) >= -" . $nbJours . " GROUP BY YEAR(visitDate), MONTH(visitDate), DAY(visitDate) ";
+		$query = "SELECT COUNT(*), YEAR(visitDate), MONTH(visitDate), DAY(visitDate) FROM statistiques WHERE DATEDIFF(visitDate, CURRENT_DATE) > -" . $nbJours . " GROUP BY YEAR(visitDate), MONTH(visitDate), DAY(visitDate) ";
 		$resultat = mysql_query ( $query );
 		
 		$row = mysql_fetch_row ( $resultat );
@@ -105,13 +105,14 @@ class Statistiques {
 			$end = new DateTime ( $row [1] . '-' . $row [2] . '-' . $row [3] );
 			
 			$interval = DateInterval::createFromDateString ( '1 day' );
-			$period = new DatePeriod ( date_add ( $begin, $interval ), $interval, $end );
+			$period = new DatePeriod ( $begin->add ( $interval ), $interval, $end );
 			
 			foreach ( $period as $dt ) {
 				array_push ( $tmp, array ('nbVisites' => 0, 'day' => $dt->format ( "d" ), 'month' => $dt->format ( "m" ), 'year' => $dt->format ( "Y" ) ) );
 			}
 			array_push ( $tmp, array ('nbVisites' => $row [0], 'day' => $row [3], 'month' => $row [2], 'year' => $row [1] ) );
 			
+			$pre_day = $row[3];
 			$pre_month = $row [2];
 			$pre_year = $row [1];
 		}

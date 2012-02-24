@@ -87,7 +87,7 @@ include 'includes/header.php';
 						Bof fonctionnel pour le moment. Je pense
 						qu'on a plus vite fait de faire des vues web que de les afficher
 						en dur. En plus, ça sera sans doute plus propre. Il faut y
-						penser...</div>
+						penser... http://www.freepod.net/blog/?page=backend</div>
 				</div>
 			</div>
 		</div>

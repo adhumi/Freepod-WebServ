@@ -109,7 +109,7 @@ if (isset ( $_GET ['days'] )) {
 					<div class="well">
 						<p>Voir ces informations pour :</p>
 						<p>
-							<a href="stats.php?days=0" class="btn">Aujourd'hui</a> <a
+							<a href="stats.php?days=1" class="btn">Aujourd'hui</a> <a
 								href="stats.php?days=7" class="btn">7 derniers jours</a> <a
 								href="stats.php?days=30" class="btn">30 derniers jours</a>
 						</p>
