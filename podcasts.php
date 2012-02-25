@@ -6,7 +6,7 @@ connexion ( 'webserv' );
 
 require_once ($_SERVER ['DOCUMENT_ROOT'] . "/class/Podcast.php");
 
-$podcastsList = Podcast::getPodcasts();
+$podcastsList = Podcast::getPodcasts ();
 ?>
 
 <div class="container first">
@@ -29,11 +29,19 @@ $podcastsList = Podcast::getPodcasts();
 				<li class="active"><a href="podcasts.php">Tous les podcasts</a></li>
 			</ul>
 			<div class="btn-toolbar">
-				<a href="http://webserv.freepod.net/sync.php" class="btn btn-large"><i class="icon-repeat"></i> Tout
-					synchroniser</a>
-				<a href="http://webserv.freepod.net/podcast-new.php" class="btn btn-large"><i class="icon-plus"></i> Ajouter un podcast</a>
+				<a href="http://webserv.freepod.net/sync.php" class="btn btn-large"><i
+					class="icon-repeat"></i> Tout synchroniser</a> <a
+					href="http://webserv.freepod.net/podcast-new.php"
+					class="btn btn-large"><i class="icon-plus"></i> Ajouter un podcast</a>
+				<div class="btn-group pull-right">
+					<a href="podcasts.php"
+						class="btn<?php if(!isset($_GET['grille'])) echo " disabled"; ?>"><i
+						class="icon-list"></i></a> <a href="podcasts.php?grille"
+						class="btn<?php if(isset($_GET['grille'])) echo " disabled"; ?>"><i
+						class="icon-th"></i></a>
+				</div>
 			</div>
-	
+			<?php if(!isset($_GET['grille'])) { ?>
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
@@ -46,17 +54,31 @@ $podcastsList = Podcast::getPodcasts();
 				</thead>
 				<tbody>
 					<?php
-					foreach($podcastsList as $podcast) {
-						echo "<tr><td>" . $podcast ['id'] . "</td>";
-						echo "<td><a href=\"podcast.php?id=" . $podcast ['id'] . "\">" .$podcast ['nom'] . "</a></td>";
-						echo "<td>" . $podcast ['url_flux'] . "</td>";
-						echo "<td>" . $podcast ['lastUpdate'] . "</td>";
-						echo "<td><center><a href=\"podcast-edit.php?id=" . $podcast ['id'] . "\" class=\"btn btn-mini\"><i class=\"icon-cog\"></i></a>";
-						echo " <a href=\"sync.php?id=" . $podcast ['id'] . "\" class=\"btn btn-mini\"><i class=\"icon-repeat\"></i></a></center></td></tr>";
-					}
-					?>
+				foreach ( $podcastsList as $podcast ) {
+					echo "<tr><td>" . $podcast ['id'] . "</td>";
+					echo "<td><a href=\"podcast.php?id=" . $podcast ['id'] . "\">" . $podcast ['nom'] . "</a></td>";
+					echo "<td>" . $podcast ['url_flux'] . "</td>";
+					echo "<td>" . $podcast ['lastUpdate'] . "</td>";
+					echo "<td><center><a href=\"podcast-edit.php?id=" . $podcast ['id'] . "\" class=\"btn btn-mini\"><i class=\"icon-cog\"></i></a>";
+					echo " <a href=\"sync.php?id=" . $podcast ['id'] . "\" class=\"btn btn-mini\"><i class=\"icon-repeat\"></i></a></center></td></tr>";
+				}
+				?>
 				</tbody>
 			</table>
+			<?php } else { ?>
+			<div class="alert alert-info">
+				<a class="close" data-dismiss="alert">×</a>
+				Cliquez sur un podcast pour afficher des informations détaillées.    
+   			</div>
+			<ul class="thumbnails">
+				<?php
+				foreach ( $podcastsList as $podcast ) {
+					echo "<li class=\"span3\">";
+					echo "<a href=\"podcast.php?id=" . $podcast ['id'] . "\" class=\"thumbnail\" ><img src=\"" . $podcast ['logo_normal'] . "\" alt=\"". $podcast ['nom'] ."\"></a>";
+					echo " </li>";
+				} ?>
+			</ul>
+			<?php } ?>
 		</div>
 	</div>
 </div>

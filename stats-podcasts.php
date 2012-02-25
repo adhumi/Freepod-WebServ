@@ -103,7 +103,7 @@ $episodesVideo = $totalEpisodes - $episodesAudio;
 		<?php include 'includes/menu.php'; ?>
 		<div class="span9">
 			<div class="page-header">
-				<h1>Statistiques (en test)</h1>
+				<h1>Statistiques sur les podcasts</h1>
 			</div>
 			<ul class="breadcrumb">
 				<li><a href="index2.php">Home</a> <span class="divider">/</span></li>

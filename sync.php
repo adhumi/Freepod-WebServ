@@ -129,8 +129,11 @@ if (isset ( $_GET ['id'] )) {
 			mysql_query ( $query );
 		}
 	}
-	
-	header('Location: podcast.php?id='.$_GET ['id'] . '&success_sync');
+	if ($_SERVER['HTTP_REFERER'] == "http://webserv.freepod.net/podcasts.php") {
+		header('Location: podcasts.php?success_sync');
+	} else {
+		header('Location: podcast.php?id='.$_GET ['id'] . '&success_sync');
+	}
 } else {
 	/*
 	 * On récupère la liste des podcasts dans la base de données

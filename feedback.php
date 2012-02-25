@@ -25,10 +25,6 @@ connexion ( 'webserv' );
 				<li class="active"><a href="feedback.php">Feedback</a></li>
 			</ul>
 
-			<p>Ce formulaire est là pour envoyer un commentaire de toute forme
-				aux developpeurs (retour, découverte de bug, demande d'ajouts de
-				fonctionnalités, etc.). N'hésitez pas :-).</p>
-
 			<div class="well">
 				<form method="post" action="feedback-send.php"
 					class="form-horizontal">

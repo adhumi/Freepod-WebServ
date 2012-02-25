@@ -105,7 +105,7 @@ if (isset ( $_GET ['days'] )) {
 			</ul>
 
 			<div class="row">
-				<div class="span6 pull-right">
+				<div class="span4 pull-right">
 					<div class="well">
 						<p>Voir ces informations pour :</p>
 						<p>
