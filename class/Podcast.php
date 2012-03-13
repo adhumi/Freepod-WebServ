@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @author Adrien Humili�re
+ *
+ *
+ */
 class Podcast {
 	/**
 	 * Récupère les informations des podcasts.
@@ -51,7 +55,7 @@ class Podcast {
 	 * @param $logo_normal String
 	 *       	 URL du logo normal
 	 */
-	static function insertPodcast($id = 0, $nom, $url_flux, $description, $explicite, $url_site, $url_freepod, $logo_normal) {
+	static function insertPodcast($id = 0, $nom, $url_flux, $description, $explicite, $url_site, $url_freepod, $logo_normal, $logo_banner) {
 		if ($id == 0) {
 			$query = "INSERT INTO podcasts SET
 				nom = '" . addslashes(htmlspecialchars($nom)) . "', 
@@ -60,7 +64,8 @@ class Podcast {
 				explicite = '" . $explicite . "', 
 				url_site = '" . $url_site . "', 
 				url_freepod = '" . $url_freepod . "', 
-				logo_normal = '" . $logo_normal . "'";
+				logo_normal = '" . $logo_normal . "',
+				logo_banner = '" . $logo_banner . "'";
 		} else {
 			$query = "UPDATE podcasts SET
 				nom = '" . addslashes(htmlspecialchars($nom)) . "',
@@ -69,7 +74,8 @@ class Podcast {
 				explicite = '" . $explicite . "',
 				url_site = '" . $url_site . "',
 				url_freepod = '" . $url_freepod . "',
-				logo_normal = '" . $logo_normal ."'
+				logo_normal = '" . $logo_normal ."',
+				logo_banner = '" . $logo_banner . "'
 				WHERE id = " . $id;
 		}
 		echo $query;

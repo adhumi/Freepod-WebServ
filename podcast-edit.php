@@ -91,6 +91,13 @@ $podcast = Podcast::getPodcasts ( $_GET ['id'] );
 						</div>
 					</div>
 					<div class="control-group">
+						<label class="control-label" for="logo">Logo banner</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge span5" id="logo_banner" name="logo_banner"
+								value="<?php echo $podcast['logo_banner']; ?>">
+						</div>
+					</div>
+					<div class="control-group">
 						<div class="controls">
 							<input type="submit" class="btn-primary btn-large"
 								value="Enregistrer">

@@ -44,6 +44,7 @@ include 'includes/header.php';
 						<li><code>lastUpdate</code></li>
 						<li><code>lastSynch</code></li>
 						<li><code>logo_normal</code></li>
+						<li><code>logo_banner</code></li>
 					</ul>
 				</div>
 				<div class="span3">
@@ -70,6 +71,7 @@ include 'includes/header.php';
 						<li><code>explicite</code></li>
 						<li><code>duration</code></li>
 						<li><code>image</code></li>
+						<li><code>keywords</code></li>
 					</ul>
 				</div>
 				<div class="span3">

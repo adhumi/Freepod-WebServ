@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @author Adrien Humili�re
+ *
+ *
+ */
 class Statistiques {
 	/**
 	 * Affiche les informations du client.

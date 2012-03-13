@@ -75,6 +75,13 @@ include 'includes/header.php';
 						</div>
 					</div>
 					<div class="control-group">
+						<label class="control-label" for="logo">Logo Banner</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge span5" id="logo_banner" name="logo_banner"
+								value="">
+						</div>
+					</div>
+					<div class="control-group">
 						<div class="controls">
 							<input type="submit" class="btn-primary btn-large"
 								value="Enregistrer">

@@ -14,7 +14,7 @@
 		<li><a href="stats-podcasts.php"><i class="icon-signal"></i> Statistiques sur les podcasts</a></li>
 		<li><a href="stats-tests.php"><i class="icon-signal"></i> Expérimentations</a></li>
 		<li class="nav-header">Notifications</li>
-		<li><a href="#"><i class="icon-envelope"></i> Coming soon</a></li>
+		<li><a href="#" onclick="return false;"><i class="icon-envelope"></i> Coming soon</a></li>
 		<li class="nav-header">Tools</li>
 		<li><a href="users.php"><i class="icon-user"></i> Liste des utilisateurs</a></li>
 		<li><a href="status.php"><i class="icon-eye-open"></i> Statut</a></li>

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @author Adrien Humili�re
+ *
+ *
+ */
 class Episode {
 	/**
 	 * Récupère les informations des épisodes.

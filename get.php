@@ -4,12 +4,12 @@ include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
 // Si l'appelant n'est pas le serveur de Freepod (éviter les requêtes de status.php) 
-if ($_SERVER ['REMOTE_ADDR'] != "46.105.123.206") {
-	require_once ($_SERVER ['DOCUMENT_ROOT'] . "/class/Statistiques.php");
-	Statistiques::insertClientInfos ();
-}
+//if ($_SERVER ['REMOTE_ADDR'] != "46.105.123.206") {
+//	require_once ($_SERVER ['DOCUMENT_ROOT'] . "/class/Statistiques.php");
+//	Statistiques::insertClientInfos ();
+//}
 
-if (isset ( $_GET ['key'] ) && mysql_num_rows ( mysql_query ( "SELECT * FROM `api_key`  WHERE token = '" . $_GET ['key'] . "'" ) ) != 0) {
+//if (isset ( $_GET ['key'] ) && mysql_num_rows ( mysql_query ( "SELECT * FROM `api_key`  WHERE token = '" . $_GET ['key'] . "'" ) ) != 0) {
 	
 	if (isset ( $_GET ['podcasts'] )) {
 		$cache = "cache/get_podcasts.html";
@@ -86,8 +86,8 @@ if (isset ( $_GET ['key'] ) && mysql_num_rows ( mysql_query ( "SELECT * FROM `ap
 		}
 	}
 
-} else {
-	echo "{\"erreur\":\"API Key\"}";
-}
+//} else {
+//	echo "{\"erreur\":\"API Key\"}";
+//}
 
 ?>
