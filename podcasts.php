@@ -56,7 +56,11 @@ $podcastsList = Podcast::getPodcasts ();
 					<?php
 				foreach ( $podcastsList as $podcast ) {
 					echo "<tr><td>" . $podcast ['id'] . "</td>";
-					echo "<td><a href=\"podcast.php?id=" . $podcast ['id'] . "\">" . $podcast ['nom'] . "</a></td>";
+					echo "<td><a href=\"podcast.php?id=" . $podcast ['id'] . "\">" . $podcast ['nom'] . "</a> ";
+					if (isset($podcast ['new']) && $podcast ['new'] == "yes") {
+						echo "<span class=\"label label-success\">new</span>";
+					}
+					echo "</td>";
 					echo "<td>" . $podcast ['url_flux'] . "</td>";
 					echo "<td>" . $podcast ['lastUpdate'] . "</td>";
 					echo "<td><center><a href=\"podcast-edit.php?id=" . $podcast ['id'] . "\" class=\"btn btn-mini\"><i class=\"icon-cog\"></i></a>";

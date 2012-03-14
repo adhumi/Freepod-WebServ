@@ -58,33 +58,6 @@ connexion ( 'webserv' );
 			echo $page;
 		}
 	}
-	
-	else if (isset ( $_GET ['blog'] )) {
-		$cache = "cache/get_blog.html";
-		$expire = time () - 3600;
-		
-		if (//file_exists ( $cache ) && filemtime ( $cache ) > $expire) {
-			false){readfile ( $cache );
-		} else {
-			connexion ( 'freepod' );
-			
-			ob_start ();
-			mysql_query('SET CHARACTER SET utf8');
-			$query = "SELECT * FROM spip_articles WHERE id_rubrique = 2 ORDER BY date DESC LIMIT 10";
-			$sth = mysql_query ( $query );
-			$rows = array ();
-			while ( $r = mysql_fetch_assoc ( $sth ) ) {
-				array_push($rows,$r);
-			}
-			echo json_encode ( $rows );
-				
-			$page = ob_get_contents ();
-			ob_end_clean ();
-				
-			file_put_contents ( $cache, $page );
-			echo $page;
-		}
-	}
 
 //} else {
 //	echo "{\"erreur\":\"API Key\"}";

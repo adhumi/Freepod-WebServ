@@ -129,6 +129,19 @@ if (isset ( $_GET ['id'] )) {
 			mysql_query ( $query );
 		}
 	}
+	
+	// Calcul du champ new
+	$query = "UPDATE podcasts SET new = 'no'";
+	mysql_query($query);
+	
+	$query = "SELECT id_podcast FROM episodes ORDER BY pubDate DESC LIMIT 1";
+	$query_podcast_new = mysql_query($query);
+	$row_podcast_new = mysql_fetch_row ( $query_podcast_new );
+	
+	$query = "UPDATE podcasts SET new = 'yes' WHERE id =" . $row_podcast_new[0];
+	mysql_query($query);
+	
+	
 	if ($_SERVER['HTTP_REFERER'] == "http://webserv.freepod.net/podcasts.php") {
 		header('Location: podcasts.php?success_sync');
 	} else {
@@ -248,6 +261,17 @@ if (isset ( $_GET ['id'] )) {
 			}
 		}
 	}
+	// Calcul du champ new
+	$query = "UPDATE podcasts SET new = 'no'";
+	mysql_query($query);
+	
+	$query = "SELECT id_podcast FROM episodes ORDER BY pubDate DESC LIMIT 1";
+	$query_podcast_new = mysql_query($query);
+	$row_podcast_new = mysql_fetch_row ( $query_podcast_new );
+	
+	$query = "UPDATE podcasts SET new = 'yes' WHERE id =" . $row_podcast_new[0];
+	mysql_query($query);
+	
 	header('Location: podcasts.php?success_sync');
 }
 ?>

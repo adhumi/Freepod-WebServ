@@ -45,7 +45,9 @@ include 'includes/header.php';
 						<li><code>lastSynch</code></li>
 						<li><code>logo_normal</code></li>
 						<li><code>logo_banner</code></li>
+						<li><code>new</code></li>
 					</ul>
+					<p>Note : le champ <code>new</code> est sur <code>yes</code> ou <code>no</code>. Seul le podcast ayant été mis à jour le plus récemment est sur <code>yes</code>.</p>
 				</div>
 				<div class="span3">
 					<h4>Récupération de la liste des émissions pour un podcast</h4>
@@ -73,23 +75,6 @@ include 'includes/header.php';
 						<li><code>image</code></li>
 						<li><code>keywords</code></li>
 					</ul>
-				</div>
-				<div class="span3">
-					<h4>Récupération des billets du blog</h4>
-					<p>
-						Permet de récupérer un json avec la liste des billets du blog et
-						leurs caractéristiques. Triés et identifiés par un id unique.
-						<code>API_KEY</code>
-						correspond à la clé d'authenfication de l'application.
-					</p>
-					<pre>http://webserv.freepod.net/get.php?blog&key=API_KEY</pre>
-					<div class="alert alert-info alert-block">
-						<a class="close" data-dismiss="alert">×</a>
-						<h4 class="alert-heading">A noter</h4>
-						Bof fonctionnel pour le moment. Je pense
-						qu'on a plus vite fait de faire des vues web que de les afficher
-						en dur. En plus, ça sera sans doute plus propre. Il faut y
-						penser... http://www.freepod.net/blog/?page=backend</div>
 				</div>
 			</div>
 		</div>
