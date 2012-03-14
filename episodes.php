@@ -44,6 +44,8 @@ include 'includes/header.php';
 							echo "<tr><td><span class=\"label label-success\">Clean</span></td></tr>";
 						} elseif ($row [8] == "no" || $row [8] == "No") {
 							echo "<tr><td><span class=\"label label-normal\">" . $row [8] . "</span></td></tr>";
+						} else {
+							echo "<tr><td></td></tr>";
 						}
 					}
 					?>

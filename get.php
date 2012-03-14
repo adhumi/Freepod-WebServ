@@ -43,7 +43,7 @@ connexion ( 'webserv' );
 			readfile ( $cache );
 		} else {
 			ob_start ();
-			$query = "SELECT * FROM episodes WHERE id_podcast = " . $_GET ['episodes'];
+			$query = "SELECT * FROM episodes WHERE id_podcast = " . $_GET ['episodes'] . " ORDER BY pubDate ASC";
 			$sth = mysql_query ( $query );
 			$rows = array ();
 			while ( $r = mysql_fetch_assoc ( $sth ) ) {
