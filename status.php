@@ -26,10 +26,10 @@ include 'includes/header.php';
 						<td>GET</td>
 						<td>/get.php?podcasts&key=API_KEY</td>
 						<td>
-						<?php if (json_decode(file_get_contents('http://webserv.freepod.net/get.php?podcasts&key=4e2e322f522a5c38523f577621757b2849572a225577495e54357a354e'))){ ?>
-							<a href="http://webserv.freepod.net/get.php?podcasts&key=4e2e322f522a5c38523f577621757b2849572a225577495e54357a354e" class="btn btn-small btn-success">Opérationnel</a>
+						<?php if (json_decode(file_get_contents('http://webserv.freepod.net/get.php?podcasts'))){ ?>
+							<a href="http://webserv.freepod.net/get.php?podcasts" class="btn btn-small btn-success">Opérationnel</a>
 						<?php } else { ?>
-							<a href="http://webserv.freepod.net/get.php?podcasts&key=4e2e322f522a5c38523f577621757b2849572a225577495e54357a354e" class="btn btn-small btn-danger">Erreur</a>
+							<a href="http://webserv.freepod.net/get.php?podcasts" class="btn btn-small btn-danger">Erreur</a>
 						<?php } ?>
 						</td>
 					</tr>
@@ -37,10 +37,10 @@ include 'includes/header.php';
 						<td>GET</td>
 						<td>/get.php?episodes=ID_PODCAST&key=API_KEY</td>
 						<td>
-						<?php if (json_decode(file_get_contents('http://webserv.freepod.net/get.php?episodes=1&key=4e2e322f522a5c38523f577621757b2849572a225577495e54357a354e'))){ ?>
-							<a href="http://webserv.freepod.net/get.php?episodes=1&key=4e2e322f522a5c38523f577621757b2849572a225577495e54357a354e" class="btn btn-small btn-success">Opérationnel</a>
+						<?php if (json_decode(file_get_contents('http://webserv.freepod.net/get.php?episodes=1'))){ ?>
+							<a href="http://webserv.freepod.net/get.php?episodes=1" class="btn btn-small btn-success">Opérationnel</a>
 						<?php } else { ?>
-							<a href="http://webserv.freepod.net/get.php?episodes=1&key=4e2e322f522a5c38523f577621757b2849572a225577495e54357a354e" class="btn btn-small btn-danger">Erreur</a>
+							<a href="http://webserv.freepod.net/get.php?episodes=1" class="btn btn-small btn-danger">Erreur</a>
 						<?php } ?>
 						</td>
 					</tr>

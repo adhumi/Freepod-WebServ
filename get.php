@@ -3,8 +3,9 @@
 include ('includes/bdd_connect.php');
 connexion ( 'webserv' );
 
-// Si l'appelant n'est pas le serveur de Freepod (éviter les requêtes de status.php) 
-//if ($_SERVER ['REMOTE_ADDR'] != "46.105.123.206") {
+// TODO Implementation Satistiques
+
+//if (isset($_GET['platform'])) {
 //	require_once ($_SERVER ['DOCUMENT_ROOT'] . "/class/Statistiques.php");
 //	Statistiques::insertClientInfos ();
 //}
@@ -54,6 +55,37 @@ connexion ( 'webserv' );
 			$page = ob_get_contents ();
 			ob_end_clean ();
 			
+			file_put_contents ( $cache, $page );
+			echo $page;
+		}
+	}
+	
+	else if (isset ( $_GET ['podcast_recent'] )) {
+		
+		if ($_GET ['podcast_recent'] != null) {
+			$limit = $_GET ['podcast_recent'];
+		} else {
+			$limit = 1;
+		}
+		
+		$cache = "cache/get_podcast_recent_" . $limit . ".html";
+		$expire = time () - 600;
+	
+		if (file_exists ( $cache ) && filemtime ( $cache ) > $expire) {
+			readfile ( $cache );
+		} else {
+			ob_start ();
+			$query = "SELECT * FROM podcasts ORDER BY lastUpdate DESC LIMIT " . $limit;
+			$sth = mysql_query ( $query );
+			$rows = array ();
+			while ( $r = mysql_fetch_assoc ( $sth ) ) {
+				$rows [] = $r;
+			}
+			echo json_encode ( $rows );
+				
+			$page = ob_get_contents ();
+			ob_end_clean ();
+				
 			file_put_contents ( $cache, $page );
 			echo $page;
 		}

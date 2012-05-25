@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Adrien Humili�re
+ * @author Adrien Humilière
  *
  *
  */

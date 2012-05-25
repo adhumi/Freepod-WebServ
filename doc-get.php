@@ -76,6 +76,34 @@ include 'includes/header.php';
 						<li><code>keywords</code></li>
 					</ul>
 				</div>
+				<div class="span3">
+					<h4>Récupération de la liste des podcasts récents</h4>
+					<p>
+						Permet de récupérer un json avec la liste des podcasts
+						récents. Le <code>podcast_recent</code>
+						donné dans l'URL permet d'indiquer le nombre de podcasts à récupérer. Triés et identifiés
+						par un id unique.
+						<code>API_KEY</code>
+						correspond à la clé d'authenfication de l'application.
+					</p>
+					<pre>http://webserv.freepod.net/get.php?podcast_recent=NB_PODCASTS&key=API_KEY</pre>
+					<h6>Récupère les champs suivants :</h6>
+					<ul>
+						<li><code>id</code></li>
+						<li><code>nom</code></li>
+						<li><code>url_flux</code></li>
+						<li><code>description</code></li>
+						<li><code>explicite</code></li>
+						<li><code>url_site</code></li>
+						<li><code>url_freepod</code></li>
+						<li><code>lastUpdate</code></li>
+						<li><code>lastSynch</code></li>
+						<li><code>logo_normal</code></li>
+						<li><code>logo_banner</code></li>
+						<li><code>new</code></li>
+					</ul>
+					<p>Note : le champ <code>new</code> est sur <code>yes</code> ou <code>no</code>. Seul le podcast ayant été mis à jour le plus récemment est sur <code>yes</code>.</p>
+				</div>
 			</div>
 		</div>
 	</div>

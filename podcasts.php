@@ -17,8 +17,7 @@ $podcastsList = Podcast::getPodcasts ();
 			<div class="alert alert-success alert-block">
 				<a class="close" data-dismiss="alert">×</a>
 				<h4 class="alert-heading">Terminé</h4>
-				La synchronisation a été effectuée correctement. Inutile de
-				reproduire l'opération.
+				La synchronisation a été effectuée correctement. Inutile de reproduire l'opération.
 			</div>
 			<?php } ?>
 			<div class="page-header">
@@ -29,16 +28,19 @@ $podcastsList = Podcast::getPodcasts ();
 				<li class="active"><a href="podcasts.php">Tous les podcasts</a></li>
 			</ul>
 			<div class="btn-toolbar">
-				<a href="http://webserv.freepod.net/sync.php" class="btn btn-large"><i
-					class="icon-repeat"></i> Tout synchroniser</a> <a
-					href="http://webserv.freepod.net/podcast-new.php"
-					class="btn btn-large"><i class="icon-plus"></i> Ajouter un podcast</a>
+				<a href="http://webserv.freepod.net/sync.php" class="btn btn-large">
+					<i class="icon-repeat"></i> Tout synchroniser
+				</a> 
+				<a href="http://webserv.freepod.net/podcast-new.php" class="btn btn-large">
+					<i class="icon-plus"></i> Ajouter un podcast
+				</a>
 				<div class="btn-group pull-right">
-					<a href="podcasts.php"
-						class="btn<?php if(!isset($_GET['grille'])) echo " disabled"; ?>"><i
-						class="icon-list"></i></a> <a href="podcasts.php?grille"
-						class="btn<?php if(isset($_GET['grille'])) echo " disabled"; ?>"><i
-						class="icon-th"></i></a>
+					<a href="podcasts.php" class="btn<?php if(!isset($_GET['grille'])) echo " disabled"; ?>">
+						<i class="icon-list"></i>
+					</a>
+					<a href="podcasts.php?grille" class="btn<?php if(isset($_GET['grille'])) echo " disabled"; ?>">
+						<i class="icon-th"></i>
+					</a>
 				</div>
 			</div>
 			<?php if(!isset($_GET['grille'])) { ?>
@@ -53,7 +55,7 @@ $podcastsList = Podcast::getPodcasts ();
 					</tr>
 				</thead>
 				<tbody>
-					<?php
+				<?php
 				foreach ( $podcastsList as $podcast ) {
 					echo "<tr><td>" . $podcast ['id'] . "</td>";
 					echo "<td><a href=\"podcast.php?id=" . $podcast ['id'] . "\">" . $podcast ['nom'] . "</a> ";
@@ -80,12 +82,11 @@ $podcastsList = Podcast::getPodcasts ();
 					echo "<li class=\"span3\">";
 					echo "<a href=\"podcast.php?id=" . $podcast ['id'] . "\" class=\"thumbnail\" ><img src=\"" . $podcast ['logo_normal'] . "\" alt=\"". $podcast ['nom'] ."\"></a>";
 					echo " </li>";
-				} ?>
+				}
+				?>
 			</ul>
 			<?php } ?>
 		</div>
 	</div>
 </div>
-<?php
-include 'includes/footer.php';
-?>
+<?php include 'includes/footer.php'; ?>

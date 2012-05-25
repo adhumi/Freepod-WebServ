@@ -1,5 +1,12 @@
 <?php
 include 'includes/header.php';
+
+include ('includes/bdd_connect.php');
+connexion ( 'webserv' );
+
+include ($_SERVER ['DOCUMENT_ROOT'] . "/class/Episode.php");
+echo "<br/><br/><br/>";
+$episodes = Episode::getEpisodesByPodcasts(0, "pubDate", "DESC");
 ?>
 
 <div class="container first">
@@ -13,6 +20,7 @@ include 'includes/header.php';
 				<li><a href="index2.php">Home</a> <span class="divider">/</span></li>
 				<li class="active"><a href="episodes.php">Tous les &eacute;pisodes</a></li>
 			</ul>
+			
 			<table class="table">
 				<thead>
 					<tr>
@@ -25,25 +33,19 @@ include 'includes/header.php';
 				</thead>
 				<tbody>
 					<?php
-					include ('includes/bdd_connect.php');
-					connexion ( 'webserv' );
-					
-					$query = "SELECT e.id, e.id_podcast, e.title, e.url, e.type, e.description, e.pubDate, e.author, e.explicite, e.duration, e.image, e.keywords, p.nom FROM episodes AS e, podcasts AS p WHERE e.id_podcast = p.id ORDER BY pubdate DESC";
-					$result = mysql_query ( $query );
-					
-					while ( $row = mysql_fetch_row ( $result ) ) {
-						echo "<tr><td rowspan=\"3\">" . $row [0] . "</td>";
-						echo "<td><a href=\"podcast.php?id=" . $row [1] . "\">" . htmlspecialchars_decode ( $row [12] ) . "</a><br/>" . $row [2] . "</td>";
-						echo "<td>" . $row [6] . "</td>";
-						echo "<td rowspan=\"3\"><img src=\"" . $row [10] . "\" class=\"span2\" /></td></tr>";
-						echo "<tr><td rowspan=\"2\">" . $row [3] . "</td>";
-						echo "<td>" . $row [9] . "</td></tr>";
-						if ($row [8] == "yes" || $row [8] == "Yes") {
+					foreach ( $episodes as $episode ) {
+						echo "<tr><td rowspan=\"3\">" . $episode ['id'] . "</td>";
+						echo "<td><a href=\"podcast.php?id=" . $episode ['id_podcast'] . "\">" . htmlspecialchars_decode ( $episode ['nom'] ) . "</a><br/>" . $episode ['title'] . "</td>";
+						echo "<td>" . $episode ['pubDate'] . "</td>";
+						echo "<td rowspan=\"3\"><img src=\"" . $episode ['image'] . "\" class=\"span2\" /></td></tr>";
+						echo "<tr><td rowspan=\"2\"><a href=\"" . $episode ['url'] . "\">" . $episode ['type'] . "</a></td>";
+						echo "<td>" . $episode ['duration'] . "</td></tr>";
+						if ($episode ['explicite'] == "yes" || $episode ['explicite'] == "Yes") {
 							echo "<tr><td><span class=\"label label-important\">Explicit</span></td></tr>";
-						} elseif ($row [8] == "clean" || $row [8] == "Clean") {
+						} elseif ($episode ['explicite'] == "clean" || $episode ['explicite'] == "Clean") {
 							echo "<tr><td><span class=\"label label-success\">Clean</span></td></tr>";
-						} elseif ($row [8] == "no" || $row [8] == "No") {
-							echo "<tr><td><span class=\"label label-normal\">" . $row [8] . "</span></td></tr>";
+						} elseif ($episode ['explicite'] == "no" || $episode ['explicite'] == "No") {
+							echo "<tr><td><span class=\"label label-normal\">" . $episode ['explicite'] . "</span></td></tr>";
 						} else {
 							echo "<tr><td></td></tr>";
 						}

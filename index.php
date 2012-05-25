@@ -45,7 +45,6 @@ if (isset($_SESSION['auth']) && $_SESSION['auth']) {
 						<input type="password" name="password" /> <input type="submit" value="Connexion" class="btn-primary" />
 						</div> 
 						</div>
-						
 					</fieldset>
 				</form>
 			</div>
