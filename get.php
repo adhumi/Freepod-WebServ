@@ -20,7 +20,7 @@ connexion ( 'webserv' );
 			readfile ( $cache );
 		} else {
 			ob_start ();
-			$query = "SELECT * FROM podcasts";
+			$query = "SELECT * FROM podcasts ORDER BY nom ASC";
 			$sth = mysql_query ( $query );
 			$rows = array ();
 			while ( $r = mysql_fetch_assoc ( $sth ) ) {
@@ -76,6 +76,37 @@ connexion ( 'webserv' );
 		} else {
 			ob_start ();
 			$query = "SELECT * FROM podcasts ORDER BY lastUpdate DESC LIMIT " . $limit;
+			$sth = mysql_query ( $query );
+			$rows = array ();
+			while ( $r = mysql_fetch_assoc ( $sth ) ) {
+				$rows [] = $r;
+			}
+			echo json_encode ( $rows );
+				
+			$page = ob_get_contents ();
+			ob_end_clean ();
+				
+			file_put_contents ( $cache, $page );
+			echo $page;
+		}
+	}
+	
+	else if (isset ( $_GET ['episode_recent'] )) {
+		
+		if ($_GET ['episode_recent'] != null) {
+			$limit = $_GET ['episode_recent'];
+		} else {
+			$limit = 1;
+		}
+		
+		$cache = "cache/get_episode_recent_" . $limit . ".html";
+		$expire = time () - 1;
+	
+		if (file_exists ( $cache ) && filemtime ( $cache ) > $expire) {
+			readfile ( $cache );
+		} else {
+			ob_start ();
+			$query = "SELECT * FROM episodes ORDER BY pubDate DESC LIMIT " . $limit;
 			$sth = mysql_query ( $query );
 			$rows = array ();
 			while ( $r = mysql_fetch_assoc ( $sth ) ) {

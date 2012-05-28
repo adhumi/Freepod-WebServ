@@ -37,7 +37,7 @@ $episodes = Episode::getEpisodesByPodcasts(0, "pubDate", "DESC");
 						echo "<tr><td rowspan=\"3\">" . $episode ['id'] . "</td>";
 						echo "<td><a href=\"podcast.php?id=" . $episode ['id_podcast'] . "\">" . htmlspecialchars_decode ( $episode ['nom'] ) . "</a><br/>" . $episode ['title'] . "</td>";
 						echo "<td>" . $episode ['pubDate'] . "</td>";
-						echo "<td rowspan=\"3\"><img src=\"" . $episode ['image'] . "\" class=\"span2\" /></td></tr>";
+						echo "<td rowspan=\"3\"><img src=\"http://webserv.freepod.net/get-img-episode.php?id=" . $episode ['id'] . "&nom=image&width=115\" class=\"span2\" /></td></tr>";
 						echo "<tr><td rowspan=\"2\"><a href=\"" . $episode ['url'] . "\">" . $episode ['type'] . "</a></td>";
 						echo "<td>" . $episode ['duration'] . "</td></tr>";
 						if ($episode ['explicite'] == "yes" || $episode ['explicite'] == "Yes") {

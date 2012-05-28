@@ -79,12 +79,11 @@ $episodes = Episode::getEpisodesByPodcasts ( $_GET ['id'], "pubDate", "DESC");
 				<div class="span4">
 					<h6>Logo Normal</h6>
 					<a href="<?php echo $podcast['logo_normal']; ?>" class="thumbnail">
-						<img src="<?php echo $podcast['logo_normal']; ?>"
-						alt="<?php echo $podcast['nom']; ?>" />
+						<img src="http://webserv.freepod.net/get-img-podcast.php?id=<?php echo $podcast['id']; ?>&nom=logo_normal&width=360" alt="<?php echo $podcast['nom']; ?>" />
 					</a>
 					<h6>Logo Banner</h6>
 					<a href="<?php echo $podcast['logo_banner']; ?>" class="thumbnail">
-						<img src="<?php echo $podcast['logo_banner']; ?>"
+						<img src="http://webserv.freepod.net/get-img-podcast.php?id=<?php echo $podcast['id']; ?>&nom=logo_banner&width=360"
 						alt="<?php echo $podcast['nom']; ?>" />
 					</a>
 				</div>

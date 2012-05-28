@@ -36,14 +36,14 @@ if (isset($_SESSION['auth']) && $_SESSION['auth']) {
 						<div class="control-group">
 						<label for="login">Login</label> 
 							<div class="controls">
-							<input type="text" name="login" /> 
+								<input type="text" name="login" /> 
 							</div>
 						</div>
 						<div class="control-group">
-						<label for="password">Password</label> 
-						<div class="controls">
-						<input type="password" name="password" /> <input type="submit" value="Connexion" class="btn-primary" />
-						</div> 
+							<label for="password">Password</label> 
+							<div class="controls">
+								<input type="password" name="password" /> <input type="submit" value="Connexion" class="btn-primary" />
+							</div> 
 						</div>
 					</fieldset>
 				</form>

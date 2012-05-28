@@ -105,6 +105,23 @@ include 'includes/header.php';
 					<p>Note : le champ <code>new</code> est sur <code>yes</code> ou <code>no</code>. Seul le podcast ayant été mis à jour le plus récemment est sur <code>yes</code>.</p>
 				</div>
 			</div>
+			<hr/>
+			<div class="row">
+				<div class="span3">
+					<h4>Récupération d'une image d'un podcast</h4>
+					<p>
+						Permet de récupérer un PNG d'un podcast à la taille souhaitée en fonction de l'<code>ID_PODCAST</code>, du titre du champ de l'image (dans la Base de Données) et de la largeur en pixels attendue pour l'image.
+					</p>
+					<pre>http://webserv.freepod.net/get-img-podcast.php?id=ID_PODCAST&nom=NOM_DU_CHAMP&width=LARGEUR_EN_PIXELS</pre>
+				</div>
+				<div class="span3">
+					<h4>Récupération d'une image d'un épisode</h4>
+					<p>
+						Permet de récupérer un PNG d'un épisode à la taille souhaitée en fonction de l'<code>ID_EPISODE</code>, du titre du champ de l'image (dans la Base de Données) et de la largeur en pixels attendue pour l'image.
+					</p>
+					<pre>http://webserv.freepod.net/get-img-episode.php?id=ID_EPISODE&nom=NOM_DU_CHAMP&width=LARGEUR_EN_PIXELS</pre>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
